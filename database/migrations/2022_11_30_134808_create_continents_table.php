@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('continents', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->char('code', 2)->primary()->comment('Continent code');
             $table->string('name')->default(NULL);
         });

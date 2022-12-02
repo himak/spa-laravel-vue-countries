@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id('country_id');
             $table->char('code', 2)->unique()->comment('Two-letter country code (ISO 3166-1 alpha-2)');
             $table->string('name', 64)->comment('English country name');
