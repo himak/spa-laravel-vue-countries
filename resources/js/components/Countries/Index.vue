@@ -16,7 +16,7 @@
                 <td>{{ country.code }}</td>
                 <td>{{ country.name }}</td>
                 <td>{{ country.full_name }}</td>
-                <td>{{ country.continent.name }}</td>
+                <td>{{ country.continent }}</td>
             </tr>
         </tbody>
     </table>
