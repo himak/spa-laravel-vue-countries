@@ -19,7 +19,7 @@ class CountryController extends Controller
      */
     public function index(): CountryCollection
     {
-        return new CountryCollection(Country::query()->with('continent')->paginate(10));
+        return new CountryCollection(Country::query()->with('continent')->get());
     }
 
     /**
