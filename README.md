@@ -4,7 +4,7 @@ SPA web application Laravel API / Vue.js
 
 ## Deploy
 
-Create **.env** from **.env.example** and fill EUROSMS and CAPTCHA.
+Create **.env** from **.env.example**
 
     cp .env.example .env
 
@@ -23,7 +23,7 @@ Import continents and countries from this database [dump file](https://gist.gith
 | GET    | /api/countries/{country_id} | Detail of country    |
 | POST   | /api/countries              | Create a new country |
 
-# Install guide
+### Install guide
 
     laravel new project
     npm i vue

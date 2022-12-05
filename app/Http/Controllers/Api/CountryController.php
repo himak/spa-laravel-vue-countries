@@ -19,7 +19,21 @@ class CountryController extends Controller
      */
     public function index(): CountryCollection
     {
-        return new CountryCollection(Country::query()->with('continent')->paginate(10));
+        $orderColumn = request('order_column', 'name');
+        if (!in_array($orderColumn, ['code', 'name'])) {
+            $orderColumn = 'name';
+        }
+
+        $orderDirection = request('order_direction', 'asc');
+        if (!in_array($orderDirection, ['asc', 'desc'])) {
+            $orderDirection = 'asc';
+        }
+
+        $countries = Country::with('continent')
+            ->orderBy($orderColumn, $orderDirection)
+            ->paginate(10)->withQueryString();
+
+        return new CountryCollection($countries);
     }
 
     /**
