@@ -17,11 +17,12 @@ Import continents and countries from this database [dump file](https://gist.gith
 
 ## API points
 
-| Method | URL                         | Note                 |
-|--------|-----------------------------|----------------------|
-| GET    | /api/countries              | Get all countries    |
-| GET    | /api/countries/{country_id} | Detail of country    |
-| POST   | /api/countries              | Create a new country |
+| Method | URL                         | Note                   |
+|--------|-----------------------------|------------------------|
+| GET    | /api/countries              | Get all countries      |
+| GET    | /api/countries/{country_id} | Detail of country      |
+| POST   | /api/countries              | Create a new country   |
+| GET    | /api/continents             | Get list of continents |
 
 ### Install guide
 

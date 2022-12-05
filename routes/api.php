@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\CountryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('countries', CountryController::class)->except(['update','destroy']);
+
+Route::apiResource('continents', ContinentController::class)->only('index');
