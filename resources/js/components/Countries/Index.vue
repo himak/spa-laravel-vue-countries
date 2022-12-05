@@ -34,7 +34,17 @@
                     </a>
                 </th>
                 <th class="col-sm-5">Full name</th>
-                <th class="col-sm-3">Continent</th>
+                <th class="col-sm-3">
+                    <label for="continent"></label>
+                    <select v-model="selectedContinent" id="continent" name="continent" class="form-select mb-3">
+                        <option value="" selected>-- Filter by Continent --</option>
+                        <option v-for="continent in continents" :value="continent.code">
+                            {{ continent.name }}
+                        </option>
+                    </select>
+
+                    Continent
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -49,28 +59,38 @@
 
     <Bootstrap5Pagination
         :data="countries"
-        @pagination-change-page="page => getCountries(page, orderColumn, orderDirection)"
+        @pagination-change-page="page => getCountries(page, selectedContinent, orderColumn, orderDirection)"
     />
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import {ref, onMounted, watch} from "vue";
 import useCountries from "../../composables/countries";
+import useContinents from "../../composables/continents";
 
 export default {
     setup() {
+        const selectedContinent = ref('')
         const orderColumn = ref('name')
         const orderDirection = ref('asc')
         const { countries, getCountries } = useCountries()
-        onMounted(getCountries)
+        const { continents, getContinents } = useContinents()
+        onMounted( () => {
+            getCountries()
+            getContinents()
+        })
+
+        watch(selectedContinent, (current, previous) => {
+            getCountries(1, current)
+        })
 
         const updateOrdering = (column) => {
             orderColumn.value = column;
             orderDirection.value = (orderDirection.value === 'desc') ? 'asc' : 'desc';
-            getCountries(1, orderColumn.value, orderDirection.value);
+            getCountries(1, selectedContinent.value, orderColumn.value, orderDirection.value);
         }
 
-        return { countries, getCountries, orderColumn, orderDirection, updateOrdering }
+        return { countries, getCountries, continents, selectedContinent, orderColumn, orderDirection, updateOrdering }
     }
 }
 </script>

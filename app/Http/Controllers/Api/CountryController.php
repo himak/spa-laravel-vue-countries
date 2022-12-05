@@ -30,6 +30,9 @@ class CountryController extends Controller
         }
 
         $countries = Country::with('continent')
+            ->when(request('continent'), function ($query) {
+                $query->where('continent_code', request('continent'));
+            })
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(10)->withQueryString();
 

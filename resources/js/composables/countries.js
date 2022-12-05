@@ -6,11 +6,13 @@ export default function useCountries() {
 
 	const getCountries = async (
 		page = 1,
+		continent = '',
 		order_column = 'name',
 		order_direction = 'asc'
 	) => {
 
 		axios.get('/api/countries?page=' + page +
+					'&continent=' + continent +
 					'&order_column=' + order_column +
 					'&order_direction=' + order_direction
 				)
