@@ -11,8 +11,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="country in countries">
-                <td>{{ }}</td>
+            <tr v-for="(country, index) in countries" :key=index>
+                <td>{{ index+1 }}</td>
                 <td>{{ country.code }}</td>
                 <td>{{ country.name }}</td>
                 <td>{{ country.full_name }}</td>
@@ -23,21 +23,15 @@
 </template>
 
 <script>
+import { onMounted } from "vue";
+import useCountries from "../../composables/countries";
+
 export default {
-    data() {
-        return {
-            countries: []
-        }
-    },
-    mounted() {
-        this.fetchCountries()
-    },
-    methods: {
-        fetchCountries() {
-            axios.get('/api/countries')
-                .then(response => this.countries = response.data.data)
-                .catch(error => console.log(error))
-        }
+    setup() {
+        const { countries, getCountries } = useCountries()
+        onMounted(getCountries)
+
+        return { countries }
     }
 }
 </script>
