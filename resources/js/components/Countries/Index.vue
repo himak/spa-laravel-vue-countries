@@ -3,16 +3,14 @@
         <caption>List of Countries</caption>
         <thead>
             <tr>
-                <th>#</th>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Full name</th>
-                <th>Continent</th>
+                <th class="col-sm-1">Code</th>
+                <th class="col-sm-3">Name</th>
+                <th class="col-sm-5">Full name</th>
+                <th class="col-sm-3">Continent</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(country, index) in countries" :key=index>
-                <td>{{ index+1 }}</td>
+            <tr v-for="(country) in countries.data" :key="country.code">
                 <td>{{ country.code }}</td>
                 <td>{{ country.name }}</td>
                 <td>{{ country.full_name }}</td>
@@ -20,6 +18,11 @@
             </tr>
         </tbody>
     </table>
+
+    <Bootstrap5Pagination
+        :data="countries"
+        @pagination-change-page="getCountries"
+    />
 </template>
 
 <script>
@@ -31,7 +34,7 @@ export default {
         const { countries, getCountries } = useCountries()
         onMounted(getCountries)
 
-        return { countries }
+        return { countries, getCountries }
     }
 }
 </script>
