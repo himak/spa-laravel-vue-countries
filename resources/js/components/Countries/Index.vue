@@ -7,7 +7,7 @@
                 <tr>
                     <th class="col-sm-1">
                         <a class="d-flex text-decoration-none text-black" @click="updateOrdering('code')">
-                            <div :class="{ 'text-primary': orderColumn === 'code' }">Code</div>
+                            <div :class="{ 'text-primary': orderColumn === 'code' }" class="text-uppercase">Code</div>
                             <div class="ms-2">
                             <span :class="{
                                 'visually-hidden': orderDirection === 'asc' && orderColumn === 'code',
@@ -22,7 +22,7 @@
                     </th>
                     <th class="col-sm-3">
                         <a class="d-flex text-decoration-none text-black" @click="updateOrdering('name')" >
-                            <div :class="{ 'text-primary': orderColumn === 'name' }">Name</div>
+                            <div :class="{ 'text-primary': orderColumn === 'name' }" class="text-uppercase">Name</div>
                             <div class="ms-2">
                             <span :class="{
                                 'visually-hidden': orderDirection === 'asc' && orderColumn === 'name',
@@ -35,7 +35,7 @@
                             </div>
                         </a>
                     </th>
-                    <th class="col-sm-5">Full name</th>
+                    <th class="col-sm-5 text-uppercase">Full name</th>
                     <th class="col-sm-3">
                         <label for="continent"></label>
                         <select v-model="selectedContinent" id="continent" name="continent" class="form-select mb-3">
@@ -45,14 +45,18 @@
                             </option>
                         </select>
 
-                        Continent
+                        <span class="text-uppercase">Continent</span>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(country) in countries.data" :key="country.code">
                     <td>{{ country.code }}</td>
-                    <td>{{ country.name }}</td>
+                    <td>
+                        <router-link :to="`/countries/${country.country_id}`">
+                            {{ country.name }}
+                        </router-link>
+                    </td>
                     <td>{{ country.full_name }}</td>
                     <td>{{ country.continent }}</td>
                 </tr>
