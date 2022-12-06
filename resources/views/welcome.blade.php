@@ -8,12 +8,6 @@
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-    <body>
-        <div id="app">
-            <div class="container py-5">
-                <h1 class="mb-5">Countries</h1>
-                <countries-index />
-            </div>
-        </div>
+    <body id="app">
     </body>
 </html>

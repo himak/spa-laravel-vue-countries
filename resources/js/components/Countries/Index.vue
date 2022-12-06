@@ -1,12 +1,14 @@
 <template>
-    <table class="table table-striped table-hover">
-        <caption>List of Countries</caption>
-        <thead>
-            <tr>
-                <th class="col-sm-1">
-                    <a class="d-flex text-decoration-none text-black" @click="updateOrdering('code')">
-                        <div :class="{ 'text-primary': orderColumn === 'code' }">Code</div>
-                        <div class="ms-2">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <caption>List of Countries</caption>
+                <thead>
+                <tr>
+                    <th class="col-sm-1">
+                        <a class="d-flex text-decoration-none text-black" @click="updateOrdering('code')">
+                            <div :class="{ 'text-primary': orderColumn === 'code' }">Code</div>
+                            <div class="ms-2">
                             <span :class="{
                                 'visually-hidden': orderDirection === 'asc' && orderColumn === 'code',
                                 'text-primary': orderDirection !== '' && orderDirection !== 'asc' && orderColumn === 'code',
@@ -15,52 +17,55 @@
                                 'visually-hidden': orderDirection === 'desc' && orderColumn === 'code',
                                 'text-primary': orderDirection !== '' && orderDirection !== 'desc' && orderColumn === 'code',
                             }">&darr;</span>
-                        </div>
-                    </a>
-                </th>
-                <th class="col-sm-3">
-                    <a class="d-flex text-decoration-none text-black" @click="updateOrdering('name')" >
-                        <div :class="{ 'text-primary': orderColumn === 'name' }">Name</div>
-                        <div class="ms-2">
+                            </div>
+                        </a>
+                    </th>
+                    <th class="col-sm-3">
+                        <a class="d-flex text-decoration-none text-black" @click="updateOrdering('name')" >
+                            <div :class="{ 'text-primary': orderColumn === 'name' }">Name</div>
+                            <div class="ms-2">
                             <span :class="{
                                 'visually-hidden': orderDirection === 'asc' && orderColumn === 'name',
                                 'text-primary': orderDirection !== '' && orderDirection !== 'asc' && orderColumn === 'name',
                             }">&uarr;</span>
-                            <span :class="{
+                                <span :class="{
                                 'visually-hidden': orderDirection === 'desc' && orderColumn === 'name',
                                 'text-primary': orderDirection !== '' && orderDirection !== 'desc' && orderColumn === 'name',
                             }">&darr;</span>
-                        </div>
-                    </a>
-                </th>
-                <th class="col-sm-5">Full name</th>
-                <th class="col-sm-3">
-                    <label for="continent"></label>
-                    <select v-model="selectedContinent" id="continent" name="continent" class="form-select mb-3">
-                        <option value="" selected>-- Filter by Continent --</option>
-                        <option v-for="continent in continents" :value="continent.code">
-                            {{ continent.name }}
-                        </option>
-                    </select>
+                            </div>
+                        </a>
+                    </th>
+                    <th class="col-sm-5">Full name</th>
+                    <th class="col-sm-3">
+                        <label for="continent"></label>
+                        <select v-model="selectedContinent" id="continent" name="continent" class="form-select mb-3">
+                            <option value="" selected>-- Filter by Continent --</option>
+                            <option v-for="continent in continents" :value="continent.code">
+                                {{ continent.name }}
+                            </option>
+                        </select>
 
-                    Continent
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(country) in countries.data" :key="country.code">
-                <td>{{ country.code }}</td>
-                <td>{{ country.name }}</td>
-                <td>{{ country.full_name }}</td>
-                <td>{{ country.continent }}</td>
-            </tr>
-        </tbody>
-    </table>
+                        Continent
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(country) in countries.data" :key="country.code">
+                    <td>{{ country.code }}</td>
+                    <td>{{ country.name }}</td>
+                    <td>{{ country.full_name }}</td>
+                    <td>{{ country.continent }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <Bootstrap5Pagination
-        :data="countries"
-        @pagination-change-page="page => getCountries(page, selectedContinent, orderColumn, orderDirection)"
-    />
+        <Bootstrap5Pagination
+            :data="countries"
+            :limit="2"
+            @pagination-change-page="page => getCountries(page, selectedContinent, orderColumn, orderDirection)"
+        />
+    </div>
 </template>
 
 <script>
