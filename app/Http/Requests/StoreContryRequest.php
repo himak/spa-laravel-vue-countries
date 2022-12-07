@@ -31,7 +31,17 @@ class StoreContryRequest extends FormRequest
             'iso3' => 'required|string|max:3',
             'number' => 'required|numeric|max:65535',
             'continent_code' => 'required|string|max:2|exists:continents,code',
-            'display_order' => 'required|numeric|max:900',
+            'display_order' => 'required|numeric|min:1|max:900',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'full_name' => 'full name',
+            'iso3' => 'ISO3',
+            'continent_code' => 'continent',
+            'display_order' => 'display order'
         ];
     }
 

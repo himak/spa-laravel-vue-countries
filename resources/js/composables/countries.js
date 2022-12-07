@@ -5,6 +5,7 @@ export default function useCountries() {
 
 	const countries = ref({})
 	const router = useRouter()
+	const validationErrors = ref({})
 
 	const getCountries = async (
 		page = 1,
@@ -28,7 +29,12 @@ export default function useCountries() {
 			.then(response => {
 				router.push({ name: 'countries.index' })
 			})
+			.catch(error => {
+				if(error.response?.data) {
+					validationErrors.value = error.response.data.errors
+				}
+			})
 	}
 
-	return { countries, getCountries, storeCountry }
+	return { countries, validationErrors, getCountries, storeCountry }
 }
