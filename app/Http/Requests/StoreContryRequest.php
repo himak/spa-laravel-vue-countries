@@ -46,6 +46,7 @@ class StoreContryRequest extends FormRequest
     {
         $this->merge([
             'continent_code' => Str::upper($this->continent_code),
+            'display_order' => (int) $this->display_order
         ]);
     }
 }

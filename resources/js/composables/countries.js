@@ -1,8 +1,10 @@
 import { ref } from 'vue'
+import { useRouter} from "vue-router";
 
 export default function useCountries() {
 
 	const countries = ref({})
+	const router = useRouter()
 
 	const getCountries = async (
 		page = 1,
@@ -21,5 +23,12 @@ export default function useCountries() {
 				})
 	}
 
-	return { countries, getCountries }
+	const storeCountry = async (country) => {
+		axios.post('/api/countries', country)
+			.then(response => {
+				router.push({ name: 'countries.index' })
+			})
+	}
+
+	return { countries, getCountries, storeCountry }
 }

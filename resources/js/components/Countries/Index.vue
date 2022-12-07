@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <router-link to="/countries/create" class="btn btn-outline-primary mt-4">
+            + Add new country
+        </router-link>
+
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <caption>List of Countries</caption>
